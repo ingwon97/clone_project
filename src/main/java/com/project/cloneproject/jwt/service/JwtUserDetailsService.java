@@ -1,8 +1,8 @@
-package com.project.cloneproject.service;
+package com.project.cloneproject.jwt.service;
 
-import com.project.cloneproject.member.Member;
-import com.project.cloneproject.member.MemberRepository;
-import com.project.cloneproject.member.Role;
+import com.project.cloneproject.jwt.member.Member;
+import com.project.cloneproject.jwt.member.MemberRepository;
+import com.project.cloneproject.jwt.member.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.GrantedAuthority;

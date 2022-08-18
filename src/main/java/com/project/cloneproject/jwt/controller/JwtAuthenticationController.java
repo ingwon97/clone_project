@@ -1,9 +1,8 @@
-package com.project.cloneproject.controller;
+package com.project.cloneproject.jwt.controller;
 
-import com.project.cloneproject.config.JwtTokenUtil;
-import com.project.cloneproject.member.Member;
-import com.project.cloneproject.member.MemberRepository;
-import com.project.cloneproject.service.JwtUserDetailsService;
+import com.project.cloneproject.jwt.config.JwtTokenUtil;
+import com.project.cloneproject.jwt.member.Member;
+import com.project.cloneproject.jwt.service.JwtUserDetailsService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;

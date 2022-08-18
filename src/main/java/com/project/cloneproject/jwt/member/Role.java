@@ -1,4 +1,4 @@
-package com.project.cloneproject.member;
+package com.project.cloneproject.jwt.member;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

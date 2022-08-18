@@ -1,4 +1,4 @@
-package com.project.cloneproject.config;
+package com.project.cloneproject.jwt.config;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

@@ -1,4 +1,4 @@
-package com.project.cloneproject.config;
+package com.project.cloneproject.jwt.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;

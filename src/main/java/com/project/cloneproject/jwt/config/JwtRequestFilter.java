@@ -1,6 +1,6 @@
-package com.project.cloneproject.config;
+package com.project.cloneproject.jwt.config;
 
-import com.project.cloneproject.service.JwtUserDetailsService;
+import com.project.cloneproject.jwt.service.JwtUserDetailsService;
 import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

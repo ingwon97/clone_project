@@ -1,7 +1,7 @@
-package com.project.cloneproject.controller;
+package com.project.cloneproject.jwt.controller;
 
-import com.project.cloneproject.member.Member;
-import com.project.cloneproject.member.MemberRepository;
+import com.project.cloneproject.jwt.member.Member;
+import com.project.cloneproject.jwt.member.MemberRepository;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;

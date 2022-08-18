@@ -1,12 +1,13 @@
-package com.project.cloneproject.controller;
+package com.project.cloneproject.jwt.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HomeController {
 
-    @GetMapping("/hello")
+    @PostMapping("/hello")
     public String firstPage() {
         return "Hello World";
     }

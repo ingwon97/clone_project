@@ -1,4 +1,4 @@
-package com.project.cloneproject.member;
+package com.project.cloneproject.jwt.member;
 
 import org.springframework.data.repository.CrudRepository;
 

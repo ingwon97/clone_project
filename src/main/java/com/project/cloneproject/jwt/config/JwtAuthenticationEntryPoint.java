@@ -1,4 +1,4 @@
-package com.project.cloneproject.config;
+package com.project.cloneproject.jwt.config;
 
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;

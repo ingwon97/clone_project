@@ -1,8 +1,8 @@
-package com.project.cloneproject.config;
+package com.project.cloneproject.jwt.config;
 
 
-import com.project.cloneproject.member.Member;
-import com.project.cloneproject.member.MemberRepository;
+import com.project.cloneproject.jwt.member.Member;
+import com.project.cloneproject.jwt.member.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
