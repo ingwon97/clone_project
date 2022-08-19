@@ -38,3 +38,13 @@ out/
 
 ### VS Code ###
 .vscode/
+
+caches/**
+.tmp/**
+daemon/**
+native/**
+wrapper/**
+
+
+### AWS ###
+aws.yml
