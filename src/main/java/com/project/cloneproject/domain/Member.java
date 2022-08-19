@@ -36,7 +36,17 @@ public class Member extends Timestamped {
   private String password;
 
   private String profileImg;
-/*
+
+  // 내가 등록한 것
+  @JsonIgnore
+  @OneToMany(mappedBy = "member", orphanRemoval = true, cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+  List<Friend> friends = new ArrayList<>();
+
+  public List<Friend> getFriends() {
+    return friends;
+  }
+
+  /*
 
   @OneToMany(mappedBy = "fromMember")
   @Column
