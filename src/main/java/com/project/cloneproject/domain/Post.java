@@ -9,6 +9,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Builder
@@ -30,6 +32,9 @@ public class Post extends Timestamped{
     @Column(nullable = false)
     @Lob
     private String content;
+
+    @OneToMany(mappedBy = "post")
+    private List<Comment> commentList = new ArrayList<>();
 
     public Post(PostRequestDto postRequestDto, Member member) {
         this.imageUrl = postRequestDto.getImageUrl();
