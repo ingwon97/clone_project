@@ -1,6 +1,7 @@
 package com.project.cloneproject.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -38,6 +39,7 @@ public class Member extends Timestamped {
   private String profileImg;
 
   // 내가 등록한 것
+//  @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
   @JsonIgnore
   @OneToMany(mappedBy = "member", orphanRemoval = true, cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
   List<Friend> friends = new ArrayList<>();

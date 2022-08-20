@@ -1,6 +1,7 @@
 package com.project.cloneproject.controller;
 
 import com.project.cloneproject.controller.request.PostRequestDto;
+import com.project.cloneproject.controller.response.ResponseDto;
 import com.project.cloneproject.domain.UserDetailsImpl;
 import com.project.cloneproject.service.PostService;
 import lombok.RequiredArgsConstructor;
@@ -37,5 +38,10 @@ public class PostController {
     public ResponseEntity<?> removePost(@PathVariable Long postId,
                                         @AuthenticationPrincipal UserDetailsImpl userDetails) {
         return postService.removePost(postId, userDetails);
+    }
+
+    @GetMapping("/api/posts")
+    public ResponseDto<?> getPostsByFriends(@AuthenticationPrincipal UserDetailsImpl userDetails) {
+        return postService.getPostsByFriends(userDetails);
     }
 }

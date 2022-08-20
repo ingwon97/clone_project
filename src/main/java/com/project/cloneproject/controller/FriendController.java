@@ -35,4 +35,5 @@ public class FriendController {
     public ResponseDto<?> searchFriend(@RequestParam("nickname") String nickname) {
         return friendService.searchFriend(nickname);
     }
+
 }
