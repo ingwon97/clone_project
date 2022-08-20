@@ -124,8 +124,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         skipPathList.add("GET,/images/**");
         skipPathList.add("GET,/css/**");
 
-        // 회원 관리 API 허용
-        skipPathList.add("GET,/api/member/**");
+//        // 회원 관리 API 허용
+//        skipPathList.add("GET,/api/member/**");
 
         //카카오톡 skipPathList
         skipPathList.add("GET,/oauth/**");
@@ -141,27 +141,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         skipPathList.add("POST,/api/member/signup");  //회원가입
 
 
-        skipPathList.add("POST,/api/signup/checkID");  //username 중복 체크
-        skipPathList.add("POST,/api/signup/nickID");  //nickname 중복 체크
+        skipPathList.add("POST,/api/member/signup/checkID");  //username 중복 체크
+        skipPathList.add("POST,/api/member/signup/nickID");  //nickname 중복 체크
         skipPathList.add("POST,/api/member/login");
 
-        //로그인 없이도 접근 가능한 skipPathList
-        skipPathList.add("GET,/api/**"); //GET메서드에 /api 다음 주소는 모두 로그인없이 접근 가능
-        skipPathList.add("GET,/coffees/**");
-        skipPathList.add("GET,/chatpost/**");
-        skipPathList.add("GET,/posts/**"); //포스트(게시글)
+//        //로그인 없이도 접근 가능한 skipPathList
+//        skipPathList.add("GET,/api/**"); //GET메서드에 /api 다음 주소는 모두 로그인없이 접근 가능
 
-
-        skipPathList.add("GET,/app/**");
-        skipPathList.add("POST,/app/**");
-
-        skipPathList.add("GET,/profile");
-        //무중단 배포 확인용
-        skipPathList.add("GET,/");
-        skipPathList.add("GET,/health");
-
-        //챗게시글
-        skipPathList.add("GET,/chatposts/**");
 
 //----------아래는 그대로----------
         skipPathList.add("GET,/basic.js");

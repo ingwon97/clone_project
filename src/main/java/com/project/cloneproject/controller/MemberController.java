@@ -61,11 +61,6 @@ public class MemberController {
     return memberService.checkUsername(requestDto);
   }
 
-  //nickname 중복체크
-  @PostMapping("/api/member/signup/nickID")
-  public ResponseEntity checkNickname(@RequestBody SignupRequestDto requestDto) {
-    return memberService.checkNickname(requestDto);
-  }
 
   //로그인 후 관리자 권한 얻을 수 있는 API
 //  @PutMapping("/api/signup/admin")

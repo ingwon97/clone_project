@@ -26,8 +26,8 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
 
-    @Value("${spring.admin.token}")
-    String ADMIN_TOKEN;
+//    @Value("${spring.admin.token}") // 어드민 가입용
+//    String ADMIN_TOKEN;
 
     public ResponseEntity signupUser(SignupRequestDto requestDto, String image) {
 
@@ -147,7 +147,7 @@ public class MemberService {
         String profileImage = requestDto.getProfileImage();
 
         if(requestDto.getProfileImage() == null) {
-            profileImage = "https://buckitforimg.s3.ap-northeast-2.amazonaws.com/default_profile.png"; //기본이미지
+            profileImage = "https://buckitforimg.s3.ap-northeast-2.amazonaws.com/default_profile.png"; //기본이미지 프사
         }
 
         //username 정규식 맞지 않는 경우 오류메시지 전달
