@@ -5,8 +5,10 @@ import com.project.cloneproject.controller.response.CommentResponseDto;
 import com.project.cloneproject.controller.response.CommentsResponseDto;
 import com.project.cloneproject.controller.response.ResponseDto;
 import com.project.cloneproject.domain.Comment;
+import com.project.cloneproject.domain.Member;
 import com.project.cloneproject.domain.Post;
 import com.project.cloneproject.repository.CommentRepository;
+import com.project.cloneproject.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +26,7 @@ public class CommentService {
 
     private final CommentRepository commentRepository;
     private final PostRepository postRepository;
+    private final MemberRepository memberRepository;
 
 
     // 댓글 작성
@@ -38,9 +41,11 @@ public class CommentService {
 
         // CommentRequestDto의 값을 DB에 저장
         Post post = postRepository.findById(postId).orElseThrow();
+        String loginUsername = SecurityContextHolder.getContext().getAuthentication().getName();
+        Member member = memberRepository.findByUsername(loginUsername).orElseThrow();
         Comment comment = Comment.builder()
-                .post(post.get())
-                .member(post.getMember())
+                .post(post)
+                .member(member)
                 .comment(commentRequestDto.getComment())
                 .build();
         commentRepository.save(comment);
@@ -66,8 +71,7 @@ public class CommentService {
     public ResponseEntity updateComment(Long postId, Long commentId, CommentRequestDto commentRequestDto) {
 
         // 해당 댓글이 존재하는지 여부
-        Optional<Comment> commentIsPresent = commentRepository.findById(commentId);
-        if(commentIsPresent.isEmpty()) {
+        if(commentExist(commentId) == 1) {
             return new ResponseEntity(ResponseDto.fail("404", "댓글이 존재하지 않습니다."), HttpStatus.NOT_FOUND);
         }
         Comment comment = commentRepository.findById(commentId).orElseThrow();
@@ -102,8 +106,7 @@ public class CommentService {
     public ResponseEntity deleteComment(Long postId, Long commentId) {
 
         // 해당 댓글이 존재하는지 여부
-        Optional<Comment> commentIsPresent = commentRepository.findById(commentId);
-        if(commentIsPresent.isEmpty()) {
+        if(commentExist(commentId) == 1) {
             return new ResponseEntity(ResponseDto.fail("404", "false"), HttpStatus.NOT_FOUND);
 //            return new ResponseEntity(ResponseDto.fail("404", "댓글이 존재하지 않습니다."), HttpStatus.NOT_FOUND);
         }
@@ -144,6 +147,19 @@ public class CommentService {
         return new ResponseEntity(ResponseDto.success(commentsResponseDtoList), HttpStatus.OK);
 
 
+
+    }
+
+
+
+
+    // 댓글 존재여부 판단
+    public int commentExist(Long commentId) {
+        Optional<Comment> commentIsPresent = commentRepository.findById(commentId);
+        if(commentIsPresent.isEmpty()) {
+            return 1; // 댓글 존재하지 않음.
+        }
+        return 2; // 댓글 존재함
 
     }
 
