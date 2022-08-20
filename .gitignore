@@ -49,3 +49,6 @@ wrapper/**
 
 ### AWS ###
 aws.yml
+
+application.properties
+application-secret.properties

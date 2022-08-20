@@ -27,9 +27,10 @@ public class AwsS3Config {
     //client가 s3에 접근할 수 있도록 설정하는 Bean
     @Bean
     public AmazonS3 amazonS3() {
+        BasicAWSCredentials awsCreds = new BasicAWSCredentials(accessKey, secretKey);
         return AmazonS3ClientBuilder
                 .standard()
-                .withCredentials(new AWSStaticCredentialsProvider(credentials()))
+                .withCredentials(new AWSStaticCredentialsProvider(awsCreds))
                 .withRegion(region)
                 .build();
     }

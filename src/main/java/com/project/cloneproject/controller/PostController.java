@@ -1,6 +1,7 @@
 package com.project.cloneproject.controller;
 
 import com.project.cloneproject.controller.request.PostRequestDto;
+import com.project.cloneproject.controller.response.ResponseDto;
 import com.project.cloneproject.domain.UserDetailsImpl;
 import com.project.cloneproject.service.PostService;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,8 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+
 @RestController
 @RequiredArgsConstructor
 public class PostController {
@@ -18,14 +21,14 @@ public class PostController {
 
     @PostMapping("/api/posts")
     public ResponseEntity<?> createPost(@RequestBody PostRequestDto postRequestDto,
-                                     @AuthenticationPrincipal UserDetailsImpl userDetails) {
+                                     @AuthenticationPrincipal UserDetailsImpl userDetails) throws IOException {
         return new ResponseEntity<>(postService.createPost(postRequestDto, userDetails), HttpStatus.OK);
     }
 
     @PutMapping("/api/posts/{postId}")
     public ResponseEntity<?> updatePost(@PathVariable Long postId,
                                         @RequestBody PostRequestDto postRequestDto,
-                                        @AuthenticationPrincipal UserDetailsImpl userDetails) {
+                                        @AuthenticationPrincipal UserDetailsImpl userDetails) throws IOException {
 
         return postService.updatePost(postId,postRequestDto,userDetails);
     }
@@ -35,5 +38,10 @@ public class PostController {
     public ResponseEntity<?> removePost(@PathVariable Long postId,
                                         @AuthenticationPrincipal UserDetailsImpl userDetails) {
         return postService.removePost(postId, userDetails);
+    }
+
+    @GetMapping("/api/posts")
+    public ResponseDto<?> getPostsByFriends(@AuthenticationPrincipal UserDetailsImpl userDetails) {
+        return postService.getPostsByFriends(userDetails);
     }
 }
