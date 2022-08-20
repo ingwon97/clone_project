@@ -72,10 +72,6 @@ public class AwsS3Service {
     }
 
 
-
-
-
-
     @Transactional
     public void deleteImage(String deleteUrl) {
         String deleteFileName = deleteUrl.substring(defaultEndpointUrl.length() + 1);

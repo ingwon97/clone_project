@@ -4,44 +4,24 @@ import com.project.cloneproject.controller.request.AddFriendRequestDto;
 import com.project.cloneproject.controller.response.ResponseDto;
 import com.project.cloneproject.domain.Friend;
 import com.project.cloneproject.domain.Member;
-import com.project.cloneproject.jwt.TokenProvider;
 import com.project.cloneproject.repository.FriendRepository;
 import com.project.cloneproject.repository.MemberRepository;
+import com.project.cloneproject.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.Response;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class FriendService {
 
-    private final TokenProvider tokenProvider;
     private final MemberRepository memberRepository;
     private final FriendRepository friendRepository;
 
-    public ResponseDto<?> addFriend(AddFriendRequestDto requestDto, HttpServletRequest request) {
+    public ResponseDto<?> addFriend(AddFriendRequestDto requestDto, UserDetailsImpl userDetails) {
+        Member member = userDetails.getMember();
 
-        // 멤버를 가지고 오기
-        if (null == request.getHeader("Refresh-Token")) {
-            return ResponseDto.fail("MEMBER_NOT_FOUND",
-                    "로그인이 필요합니다.");
-        }
-
-        if (null == request.getHeader("Authorization")) {
-            return ResponseDto.fail("MEMBER_NOT_FOUND",
-                    "로그인이 필요합니다.");
-        }
-
-        Member member = validateMember(request);
-        if (null == member) {
-            return ResponseDto.fail("INVALID_TOKEN", "Token이 유효하지 않습니다.");
-        }
 
         // 내가 저장할 친구
         Member fromMember = memberRepository.findById(requestDto.getMember_id()).get();
@@ -99,28 +79,11 @@ public class FriendService {
     }*/
 
 
-    @Transactional
-    public Member validateMember(HttpServletRequest request) {
-        if (!tokenProvider.validateToken(request.getHeader("Refresh-Token"))) {
-            return null;
-        }
-        return tokenProvider.getMemberFromAuthentication();
-    }
 
-    public ResponseDto<?> getFriends(HttpServletRequest request) {
 
-        // 멤버를 가지고 오기
-        if (null == request.getHeader("Refresh-Token")) {
-            return ResponseDto.fail("MEMBER_NOT_FOUND",
-                    "로그인이 필요합니다.");
-        }
+    public ResponseDto<?> getFriends(UserDetailsImpl userDetails) {
 
-        if (null == request.getHeader("Authorization")) {
-            return ResponseDto.fail("MEMBER_NOT_FOUND",
-                    "로그인이 필요합니다.");
-        }
-
-        Member member = validateMember(request);
+        Member member = userDetails.getMember();
         if (null == member) {
             return ResponseDto.fail("INVALID_TOKEN", "Token이 유효하지 않습니다.");
         }

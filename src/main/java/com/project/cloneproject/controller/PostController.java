@@ -1,12 +1,11 @@
 package com.project.cloneproject.controller;
 
 import com.project.cloneproject.controller.request.PostRequestDto;
-import com.project.cloneproject.domain.UserDetailsImpl;
+import com.project.cloneproject.security.UserDetailsImpl;
 import com.project.cloneproject.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 public class PostController {
 
     private final PostService postService;
+
 
     @PostMapping("/api/posts")
     public ResponseEntity<?> createPost(@RequestBody PostRequestDto postRequestDto,
