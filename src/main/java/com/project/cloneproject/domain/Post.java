@@ -1,7 +1,5 @@
 package com.project.cloneproject.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.project.cloneproject.controller.request.MemberRequestDto;
 import com.project.cloneproject.controller.request.PostRequestDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

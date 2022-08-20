@@ -11,7 +11,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 
@@ -38,11 +37,41 @@ public class Member extends Timestamped {
 
   private String profileImg;
 
+  @Column(unique = true)
+  private String socialId;
+
+  @Column(nullable = false)
+  @Enumerated(value = EnumType.STRING) //DB갈 때 올 때 값을 String으로 변환해줘야함
+  private RoleEnum role;
+
+
+
   // 내가 등록한 것
 //  @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
   @JsonIgnore
   @OneToMany(mappedBy = "member", orphanRemoval = true, cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
   List<Friend> friends = new ArrayList<>();
+
+  public Member(String username, String nickname, String password, String profileImg) {
+
+    this.username = username;
+    this.nickname = nickname;
+    this.password = password;
+    this.profileImg = profileImg;
+    this.socialId = null;
+    this.role = RoleEnum.USER;
+  }
+
+
+  //소셜 로그인
+  public Member(String username, String nickname, String password, String profileImage, String socialId) {
+    this.username = username;
+    this.nickname = nickname;
+    this.password = password;
+    this.profileImg = profileImage;
+    this.role = RoleEnum.USER;
+    this.socialId = socialId;
+  }
 
   public List<Friend> getFriends() {
     return friends;
@@ -58,6 +87,7 @@ public class Member extends Timestamped {
 
   @OneToMany(mappedBy = "toMember")
   List<Friend> toMembers = new ArrayList<>();*/
+
 
   @Override
   public boolean equals(Object o) {

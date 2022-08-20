@@ -7,7 +7,7 @@ import com.project.cloneproject.controller.response.ResponseDto;
 import com.project.cloneproject.domain.Friend;
 import com.project.cloneproject.domain.Member;
 import com.project.cloneproject.domain.Post;
-import com.project.cloneproject.domain.UserDetailsImpl;
+import com.project.cloneproject.security.UserDetailsImpl;
 import com.project.cloneproject.repository.FriendRepository;
 import com.project.cloneproject.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @Service
@@ -61,7 +60,7 @@ public class PostService {
             return new ResponseEntity<>(ResponseDto.success(new PostResponseDto(findPost)),HttpStatus.OK);
         }
         return new ResponseEntity<>(ResponseDto.fail("BAD_REQUEST", "작성자가 아니므로 수정권한이 없습니다."),
-                    HttpStatus.BAD_REQUEST);
+                HttpStatus.BAD_REQUEST);
     }
 
     @Transactional
@@ -98,7 +97,7 @@ public class PostService {
         // friends들을 모두 돌려줄 예정정
         // 1. 친구로 등록된 멤버들의 게시글들을 List형태로 저장
         // 2. posts.add => 해당 게시글들을 List<Post> posts 데이터 안에 add
-       for (Friend friend : friendsByMember) {
+        for (Friend friend : friendsByMember) {
             List<Post> postsByMember = postRepository.findAllByMember(friend.getFromMember());
             for (Post post : postsByMember) {
                 posts.add(post);
@@ -106,7 +105,7 @@ public class PostService {
             // 친구의 post데이터가 list형태로 반환 -> list<Post> posts에 넣어주려고 함
         }
 
-       // 위에서 추가해준 데이터들을 return해준다
+        // 위에서 추가해준 데이터들을 return해준다
         return ResponseDto.success(posts);
     }
 }
