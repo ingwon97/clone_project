@@ -52,17 +52,14 @@ public class AwsS3Service {
         String fileName = UUID.randomUUID().toString();
         String fileUrl;
 
-        try {
-            File file = convert(postRequestDto.getImageUrl()).get();
-            fileUrl = defaultEndpointUrl + "/" + fileName;
 
-            uploadFileToS3Bucket(fileName, file);
-            file.delete();
-            log.info("File uploaded to S3 successfully");
-        } catch (Exception e) {
-            log.error("Error while uploading the file to S3" + e);
-            throw e;
-        }
+        File file = convert(postRequestDto.getImageUrl())  // 파일 변환할 수 없으면 에러
+                .orElseThrow(() -> new IllegalArgumentException("error: MultipartFile -> File convert fail"));
+        fileUrl = defaultEndpointUrl + "/" + fileName;
+
+        uploadFileToS3Bucket(fileName, file);
+        file.delete();
+
         return fileUrl;
     }
 
