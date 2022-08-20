@@ -10,6 +10,8 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+
 @RestController
 @RequiredArgsConstructor
 public class PostController {
@@ -18,14 +20,14 @@ public class PostController {
 
     @PostMapping("/api/posts")
     public ResponseEntity<?> createPost(@RequestBody PostRequestDto postRequestDto,
-                                     @AuthenticationPrincipal UserDetailsImpl userDetails) {
+                                     @AuthenticationPrincipal UserDetailsImpl userDetails) throws IOException {
         return new ResponseEntity<>(postService.createPost(postRequestDto, userDetails), HttpStatus.OK);
     }
 
     @PutMapping("/api/posts/{postId}")
     public ResponseEntity<?> updatePost(@PathVariable Long postId,
                                         @RequestBody PostRequestDto postRequestDto,
-                                        @AuthenticationPrincipal UserDetailsImpl userDetails) {
+                                        @AuthenticationPrincipal UserDetailsImpl userDetails) throws IOException {
 
         return postService.updatePost(postId,postRequestDto,userDetails);
     }

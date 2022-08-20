@@ -14,6 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -23,7 +25,7 @@ public class PostService {
     private final AwsS3Service awsS3Service;
 
 
-    public ResponseDto<PostResponseDto> createPost(PostRequestDto postRequestDto, UserDetailsImpl userDetails) {
+    public ResponseDto<PostResponseDto> createPost(PostRequestDto postRequestDto, UserDetailsImpl userDetails) throws IOException {
         String fileUrl = awsS3Service.getSavedS3ImageUrl(postRequestDto);
         postRequestDto.setImageUrl(fileUrl);
 
@@ -35,7 +37,7 @@ public class PostService {
     }
 
     @Transactional
-    public ResponseEntity<?> updatePost(Long postId, PostRequestDto postRequestDto, UserDetailsImpl userDetails) {
+    public ResponseEntity<?> updatePost(Long postId, PostRequestDto postRequestDto, UserDetailsImpl userDetails) throws IOException {
         if(postRepository.findById(postId).isEmpty()){
             log.error("요청하신 게시글은 존재하지 않습니다.");
             return new ResponseEntity<>(ResponseDto.fail("NOT_FOUND", "찾으시는 게시글이 없습니다."), HttpStatus.NOT_FOUND);
