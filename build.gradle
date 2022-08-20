@@ -47,6 +47,11 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-validation'
 
 
+    //Oauth2
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+
+
 }
 
 tasks.named('test') {

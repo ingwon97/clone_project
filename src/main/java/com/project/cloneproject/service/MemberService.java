@@ -53,8 +53,6 @@ public class MemberService {
         //nickname 정규식 맞지 않는 경우 오류메시지 전달
         if(nickname.equals(""))
             throw new CustomException(ErrorCode.EMPTY_NICKNAME);
-        else if (memberRepository.findByNickname(nickname).isPresent())
-            throw new CustomException(ErrorCode.DUPLICATE_NICKNAME);
         else if ( 2 > nickname.length() || 8 < nickname.length() )
             throw new CustomException(ErrorCode.NICKNAME_LEGNTH);
         else if (!Pattern.matches(nicknamePattern, nickname))

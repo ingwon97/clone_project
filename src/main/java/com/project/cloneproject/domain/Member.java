@@ -50,9 +50,10 @@ public class Member extends Timestamped {
   @OneToMany(mappedBy = "member", orphanRemoval = true, cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
   List<Friend> friends = new ArrayList<>();
 
-  public Member(String nickname, String username, String password, String profileImg) {
-    this.nickname = nickname;
+  public Member(String username, String nickname, String password, String profileImg) {
+
     this.username = username;
+    this.nickname = nickname;
     this.password = password;
     this.profileImg = profileImg;
     this.socialId = null;

@@ -25,18 +25,18 @@ public class MemberController {
   private final AwsS3Service s3Service;
 
   //회원가입
-  @PostMapping("/member/signup")
-  public ResponseEntity signupUser(@RequestPart("signup") SignupRequestDto requestDto,
-                                   @RequestPart("profileImage") MultipartFile profileImages) throws IOException {
+  @PostMapping("api/member/signup")
+  public ResponseEntity signupUser(@RequestBody SignupImgRequestDto requestDto){
+//          @RequestPart("signup") SignupRequestDto requestDto,@RequestPart("profileImage") MultipartFile profileImages) throws IOException {
     String defaultImg = "https://buckitforimg.s3.ap-northeast-2.amazonaws.com/default_profile.png"; // 기본이미지
     String image = "";
     // 이미지를 안 넣으면 기본이미지 주기
-    if (profileImages.isEmpty()) { // 이미지가 안들어오면 true
+    if (requestDto.getProfileImage() == null) { // 이미지가 안들어오면 true
       image = defaultImg;
     } else {  // profileImages에 유저가 등록한 이미지가 들어올 때
-      String content = new String(profileImages.getBytes());
 
-      PostRequestDto dto = new PostRequestDto(content,"");
+
+      PostRequestDto dto = new PostRequestDto(requestDto.getProfileImage(),""); // 이미지 등록용으로 따로 안만들고 코드 재사용 꿀
       image = s3Service.getSavedS3ImageUrl(dto);
 
 
@@ -49,11 +49,11 @@ public class MemberController {
             .build(), image);
   }
 
-  //회원가입에 이미지가 null이 들어올 때
-  @PostMapping("/api/member/signup")
-  public ResponseEntity signupNullUser(@RequestBody SignupImgRequestDto requestDto) {
-    return memberService.signupNullUser(requestDto);
-  }
+//  //회원가입에 이미지가 null이 들어올 때
+//  @PostMapping("/api/member/signup")
+//  public ResponseEntity signupNullUser(@RequestBody SignupImgRequestDto requestDto) {
+//    return memberService.signupNullUser(requestDto);
+//  }
 
   //username 중복체크
   @PostMapping("/api/member/signup/checkID")

@@ -78,7 +78,7 @@ public class KakaoUserService {
         body.add("client_id", kakaoClientId); //본인의 REST API키
         body.add("client_secret", kakaoClientSecret);
 //        body.add("redirect_uri", kakaoRedirect); //성공 후 리다이렉트 되는 곳
-        body.add("redirect_uri", "http://localhost:3000/oauth/kakao/callback");
+        body.add("redirect_uri", kakaoRedirect);
         body.add("code", code);
 
         /**
@@ -128,13 +128,9 @@ public class KakaoUserService {
 
         String socialId = jsonNode.get("id").asText();
 
-        // nickname 랜덤
-        Random rnd = new Random();
-        String rdNick="";
-        for (int i = 0; i < 8; i++) {
-            rdNick += String.valueOf(rnd.nextInt(10));
-        }
-        String nickname = "K" + "_" + rdNick;
+        // nickname 가져오기
+
+        String nickname =  jsonNode.get("kakao_account").get("profile").get("nickname").asText();
 
         // 이메일 값 필수
         String email = jsonNode.get("kakao_account").get("email").asText();
