@@ -9,6 +9,7 @@ import com.project.cloneproject.domain.Member;
 import com.project.cloneproject.domain.Post;
 import com.project.cloneproject.repository.CommentRepository;
 import com.project.cloneproject.repository.MemberRepository;
+import com.project.cloneproject.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
