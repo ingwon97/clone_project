@@ -1,74 +1,34 @@
-# This is a basic workflow to help you get started with Actions
+name: earth-github-action-test CI
 
-name: gradle CD
-
-# Controls when the action will run. Triggers the workflow on push or pull request
-# events but only for the dev branch
+# 하기 내용에 해당하는 이벤트 발생 시 github action 동작
 on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+  push: # master 브랜치에서 push가 일어났을 때 github action 동작
+    branches:
+      - 'master'
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-22.04
-    defaults:
-      run:
-        shell: bash
-        working-directory: /cloning
-    # Steps represent a sequence of tasks that will be executed as part of the job
+  build: 
+    runs-on: ubuntu-latest # 실행 환경 지정
+
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
-      - name: Set up JDK 17
-        uses: actions/setup-java@v3
+      - uses: actions/checkout@v2 # github action 버전 지정(major version)
+
+      - name: Set up JDK 17 # JAVA 버전 지정
+        uses: actions/setup-java@v1
         with:
-          java-version: '17'
-          distribution: 'adopt'
+          java-version: 17 
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      # Build
-      - name: Build with Gradle
-        run: ./gradlew clean build
+      - name: Build with Gradle # 실제 application build(-x 옵션을 통해 test는 제외)
+        run: ./gradlew build -x test
 
-      # 전송할 파일을 담을 디렉토리 생성
-      - name: Make Directory for deliver
-        run: mkdir deploy
+      - name: Test with Gradle # test application build
+        run: ./gradlew test
 
-      # Jar 파일 Copy
-      - name: Copy Jar
-        run: cp ./build/libs/*.jar ./deploy/
-
-      # appspec.yml Copy
-      - name: Copy appspec
-        run: cp appspec.yml ./deploy/
-        
-      # S3 Bucket으로 copy
-      - name: Deliver to AWS S3
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        run: |
-          aws s3 cp \
-          --region ap-northeast-2 \
-          --acl private \
-          ./springboot-intro-build.zip s3://springboot-intro-build/
-
-      # Deploy
-      - name: Deploy
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        run: |
-          aws deploy create-deployment \
-          --application-name springboot-intro \
-          --deployment-group-name springboot-intro-deploy-group \
-          --file-exists-behavior OVERWRITE \
-          --s3-location bucket=springboot-intro-build,bundleType=zip,key=springboot-intro-build.zip \
-          --region ap-northeast-2
+      - name: Publish Unit Test Results # test 후 result를 보기 위해 추가
+        uses: EnricoMi/publish-unit-test-result-action@v1
+        if: ${{ always() }} # test가 실패해도 report를 남기기 위해 설정
+        with:
+          files: build/test-results/**/*.xml
