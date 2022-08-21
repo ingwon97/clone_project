@@ -28,6 +28,7 @@ bin/
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
+application.properties
 
 ### NetBeans ###
 /nbproject/private/
@@ -48,3 +49,6 @@ wrapper/**
 
 ### AWS ###
 aws.yml
+
+application.properties
+application-secret.properties

@@ -1,5 +1,6 @@
 package com.project.cloneproject.domain;
 
+import com.project.cloneproject.controller.request.CommentRequestDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -11,11 +12,14 @@ import javax.persistence.*;
 @Builder @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Comment {
+public class Comment extends Timestamped{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false)
+    private String comment;
 
     @JoinColumn(name = "post_id", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY)
@@ -24,5 +28,15 @@ public class Comment {
     @JoinColumn(name = "member_id", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY)
     private Member member;
+
+
+
+
+
+
+    public void update(CommentRequestDto commentRequestDto) {
+        this.comment = commentRequestDto.getComment();
+
+    }
 
 }
