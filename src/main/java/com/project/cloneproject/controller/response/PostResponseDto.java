@@ -17,8 +17,8 @@ public class PostResponseDto {
     private String content;
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
-    private Long likeNum = 0L;
-    private Long commentsNum = 0L;
+    private final Long likeNum = 0L;
+    private final Long commentsNum = 0L;
 
     public PostResponseDto(Post post) {
         this.postId = post.getId();

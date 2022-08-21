@@ -32,7 +32,7 @@ public class Post extends Timestamped{
     private String content;
 
     @OneToMany(mappedBy = "post")
-    private List<Comment> commentList = new ArrayList<>();
+    private final List<Comment> commentList = new ArrayList<>();
 
     public Post(PostRequestDto postRequestDto, Member member) {
         this.imageUrl = postRequestDto.getImageUrl();

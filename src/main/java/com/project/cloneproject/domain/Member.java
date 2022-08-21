@@ -1,24 +1,21 @@
 package com.project.cloneproject.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.Hibernate;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Builder
-@Getter
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Builder
 public class Member extends Timestamped {
 
   @Id
@@ -50,7 +47,7 @@ public class Member extends Timestamped {
 //  @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
   @JsonIgnore
   @OneToMany(mappedBy = "member", orphanRemoval = true, cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-  List<Friend> friends = new ArrayList<>();
+  final List<Friend> friends = new ArrayList<>();
 
   public Member(String username, String nickname, String password, String profileImg) {
 
