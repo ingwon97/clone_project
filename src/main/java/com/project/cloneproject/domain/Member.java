@@ -3,6 +3,7 @@ package com.project.cloneproject.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.Hibernate;
 
@@ -16,6 +17,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @Entity
 @Builder
+@Getter
 public class Member extends Timestamped {
 
   @Id
