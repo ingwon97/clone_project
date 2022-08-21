@@ -30,21 +30,45 @@ jobs:
           java-version: '17'
           distribution: 'adopt'
 
-      - name: ./gradlew 권한 설정
+      - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: 빌드
-        run: ./gradlew build
+      # Build
+      - name: Build with Gradle
+        run: ./gradlew clean build
 
-      - name: aws 세팅
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ap-northeast-2
+      # 전송할 파일을 담을 디렉토리 생성
+      - name: Make Directory for deliver
+        run: mkdir deploy
 
-      - name: S3 업로드
-        run: aws deploy push --application-name study-app-codedeploy-server --description "study-app server" --s3-location s3://study-codedeploy/server/build.zip --source .
+      # Jar 파일 Copy
+      - name: Copy Jar
+        run: cp ./build/libs/*.jar ./deploy/
 
-      - name: code deploy
-        run: aws deploy create-deployment --application-name study-app-codedeploy-server --deployment-config-name CodeDeployDefault.OneAtATime --deployment-group-name dev --s3-location bucket=study-codedeploy,bundleType=zip,key=server/build.zip
+      # appspec.yml Copy
+      - name: Copy appspec
+        run: cp appspec.yml ./deploy/
+        
+      # S3 Bucket으로 copy
+      - name: Deliver to AWS S3
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |
+          aws s3 cp \
+          --region ap-northeast-2 \
+          --acl private \
+          ./springboot-intro-build.zip s3://springboot-intro-build/
+
+      # Deploy
+      - name: Deploy
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |
+          aws deploy create-deployment \
+          --application-name springboot-intro \
+          --deployment-group-name springboot-intro-deploy-group \
+          --file-exists-behavior OVERWRITE \
+          --s3-location bucket=springboot-intro-build,bundleType=zip,key=springboot-intro-build.zip \
+          --region ap-northeast-2
