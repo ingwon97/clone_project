@@ -3,6 +3,7 @@ package com.project.cloneproject.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.Hibernate;
 
@@ -16,6 +17,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @Entity
 @Builder
+@Getter
 public class Member extends Timestamped {
 
   @Id
@@ -49,26 +51,9 @@ public class Member extends Timestamped {
   @OneToMany(mappedBy = "member", orphanRemoval = true, cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
   final List<Friend> friends = new ArrayList<>();
 
-  public Member(String username, String nickname, String password, String profileImg) {
-
-    this.username = username;
-    this.nickname = nickname;
-    this.password = password;
-    this.profileImg = profileImg;
-    this.socialId = null;
-    this.role = RoleEnum.USER;
-  }
-
 
   //소셜 로그인
-  public Member(String username, String nickname, String password, String profileImage, String socialId) {
-    this.username = username;
-    this.nickname = nickname;
-    this.password = password;
-    this.profileImg = profileImage;
-    this.role = RoleEnum.USER;
-    this.socialId = socialId;
-  }
+
 
   public List<Friend> getFriends() {
     return friends;
