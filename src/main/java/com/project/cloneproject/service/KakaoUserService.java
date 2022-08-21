@@ -30,7 +30,6 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
-import java.util.Random;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -163,7 +162,13 @@ public class KakaoUserService {
             String profileImage = kakaoUserInfo.getProfileImage();
             RoleEnum role = RoleEnum.USER; // 가입할 때 일반사용자로 로그인
 
-            kakaoUser = new Member(email, nickname, encodedPassword, profileImage, socialId);
+            kakaoUser = Member.builder().
+                         username(email)
+                        .nickname(nickname)
+                        .password(encodedPassword)
+                        .profileImg(profileImage)
+                        .socialId(socialId).build();
+
             memberRepository.save(kakaoUser);
         }
 

@@ -4,12 +4,12 @@ import com.project.cloneproject.controller.request.SignupImgRequestDto;
 import com.project.cloneproject.controller.request.SignupRequestDto;
 import com.project.cloneproject.controller.response.SocialLoginResponseDto;
 import com.project.cloneproject.domain.Member;
+import com.project.cloneproject.domain.RoleEnum;
 import com.project.cloneproject.exceptionHandler.CustomException;
 import com.project.cloneproject.exceptionHandler.ErrorCode;
 import com.project.cloneproject.repository.MemberRepository;
 import com.project.cloneproject.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -67,8 +67,16 @@ public class MemberService {
             throw new CustomException(ErrorCode.PASSWORD_WRONG);
 
         password = passwordEncoder.encode(requestDto.getPassword()); // 패스워드 암호화
-        Member member = new Member(username,nickname,password,profileImg);
+
+        Member member = Member.builder()
+                .username(username)
+                .nickname(nickname)
+                .password(password)
+                .profileImg(profileImg)
+                .role(RoleEnum.USER)
+                .build();
         memberRepository.save(member);
+
         return new ResponseEntity("회원가입을 축하합니다", HttpStatus.OK);
     }
 
@@ -88,25 +96,25 @@ public class MemberService {
         return new ResponseEntity("사용 가능한 이메일입니다.", HttpStatus.OK);
     }
 
-    //nickname 중복체크
-    public ResponseEntity checkNickname(SignupRequestDto requestDto) {
-        String nickname = requestDto.getNickname();
-        String nicknamePattern = "^[a-zA-Z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣~!@#$%^&*]{2,8}"; //닉네임 정규식 패턴
+    //nickname 중복체크 사람 실명기준이라 중복되도 상관없음
+//    public ResponseEntity checkNickname(SignupRequestDto requestDto) {
+//        String nickname = requestDto.getNickname();
+//        String nicknamePattern = "^[a-zA-Z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣~!@#$%^&*]{2,8}"; //닉네임 정규식 패턴
+//
+//        //nickname 정규식 맞지 않는 경우 오류메시지 전달
+//        if(nickname.equals(""))
+//            throw new CustomException(ErrorCode.EMPTY_NICKNAME);
+//        else if (memberRepository.findByNickname(nickname).isPresent())
+//            throw new CustomException(ErrorCode.DUPLICATE_NICKNAME);
+//        else if ( 2 > nickname.length() || 8 < nickname.length() )
+//            throw new CustomException(ErrorCode.NICKNAME_LEGNTH);
+//        else if (!Pattern.matches(nicknamePattern, nickname))
+//            throw new CustomException(ErrorCode.NICKNAME_WRONG);
+//
+//        return new ResponseEntity("사용 가능한 닉네임입니다.", HttpStatus.OK);
+//    }
 
-        //nickname 정규식 맞지 않는 경우 오류메시지 전달
-        if(nickname.equals(""))
-            throw new CustomException(ErrorCode.EMPTY_NICKNAME);
-        else if (memberRepository.findByNickname(nickname).isPresent())
-            throw new CustomException(ErrorCode.DUPLICATE_NICKNAME);
-        else if ( 2 > nickname.length() || 8 < nickname.length() )
-            throw new CustomException(ErrorCode.NICKNAME_LEGNTH);
-        else if (!Pattern.matches(nicknamePattern, nickname))
-            throw new CustomException(ErrorCode.NICKNAME_WRONG);
-
-        return new ResponseEntity("사용 가능한 닉네임입니다.", HttpStatus.OK);
-    }
-
-    //로그인 후 관리자 권한 얻을 수 있는 API
+    //로그인 후 관리자 권한 얻을 수 있는 API 관리자 접근 가능 페이지 없슴
 //    public ResponseEntity adminAuthorization(AdminRequestDto requestDto, UserDetailsImpl userDetails) {
 //        // 사용자 ROLE 확인
 //        UserRoleEnum role = UserRoleEnum.USER;
@@ -177,7 +185,15 @@ public class MemberService {
             throw new CustomException(ErrorCode.PASSWORD_WRONG);
 
         password = passwordEncoder.encode(requestDto.getPassword()); // 패스워드 암호화
-        Member member = new Member(username,nickname, password, profileImage);
+
+
+        Member member = Member.builder()
+                .username(username)
+                .nickname(nickname)
+                .password(password)
+                .profileImg(profileImage)
+                .role(RoleEnum.USER)
+                .build();
         memberRepository.save(member);
         return new ResponseEntity("회원가입을 축하합니다", HttpStatus.OK);
     }
