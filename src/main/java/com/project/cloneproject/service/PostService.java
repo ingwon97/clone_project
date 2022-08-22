@@ -3,11 +3,14 @@ package com.project.cloneproject.service;
 
 import com.project.cloneproject.controller.request.PostRequestDto;
 import com.project.cloneproject.controller.response.PostResponseDto;
+import com.project.cloneproject.controller.response.PostResponseTempDto;
 import com.project.cloneproject.controller.response.ResponseDto;
 import com.project.cloneproject.domain.Friend;
 import com.project.cloneproject.domain.Member;
 import com.project.cloneproject.domain.Post;
 import com.project.cloneproject.domain.Timestamped;
+import com.project.cloneproject.repository.CommentRepository;
+import com.project.cloneproject.repository.LikeRepository;
 import com.project.cloneproject.security.UserDetailsImpl;
 import com.project.cloneproject.repository.FriendRepository;
 import com.project.cloneproject.repository.PostRepository;
@@ -32,6 +35,8 @@ public class PostService {
     private final PostRepository postRepository;
     private final AwsS3Service awsS3Service;
     private final FriendRepository friendRepository;
+    private final LikeRepository likeRepository;
+    private final CommentRepository commentRepository;
 
 
     public ResponseDto<PostResponseDto> createPost(PostRequestDto postRequestDto, UserDetailsImpl userDetails) throws IOException {
@@ -100,6 +105,7 @@ public class PostService {
         List<Post> allByMember = postRepository.findAllByMemberOrderByCreatedAtDesc(member);
         for (Post post : allByMember) {
             posts.add(post);
+
         }
 
         // friends들을 모두 돌려줄 예정정
@@ -120,11 +126,18 @@ public class PostService {
             }
         });
 
-        posts.forEach(post -> {
-            System.out.println(post.getCreatedAt());
-        });
+        // 안에다가 commentList랑, like의 개수를 반환해줘야디는데
+        List<PostResponseTempDto> postResponseTempDtos = new ArrayList<>();
+
+        for (Post post : posts) {
+            postResponseTempDtos.add(PostResponseTempDto.builder()
+                    .posts(post)
+                    .LikeNum(post.getLikes().size())
+                    .commentNum(post.getComments().size())
+                    .build());
+        }
 
         // 위에서 추가해준 데이터들을 return해준다
-        return ResponseDto.success(posts);
+        return ResponseDto.success(postResponseTempDtos);
     }
 }

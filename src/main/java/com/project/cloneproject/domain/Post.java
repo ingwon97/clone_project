@@ -36,6 +36,14 @@ public class Post extends Timestamped{
     @OneToMany(mappedBy = "post")
     private final List<Comment> commentList = new ArrayList<>();
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "post", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private final List<Likes> likes = new ArrayList<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "comment", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private final List<Comment> comments = new ArrayList<>();
+
     public Post(PostRequestDto postRequestDto, Member member) {
         this.imageUrl = postRequestDto.getImageUrl();
         this.content = postRequestDto.getContent();
