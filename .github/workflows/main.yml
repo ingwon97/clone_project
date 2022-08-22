@@ -57,8 +57,6 @@ jobs:
           spring.security.oauth2.client.registration.kakao.scope: profile_nickname, profile_image, account_email
           spring.security.oauth2.client.registration.kakao.redirect-uri : ${{ secrets.KAKAO_REDIRECT}}
           
-          jwt.secret: ${{ secrets.JWT_SECRET}} 
-          
           
       - name: Grant execute permission for gradlew
         run: chmod +x ./gradlew
