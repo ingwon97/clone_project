@@ -30,32 +30,12 @@ jobs:
           files: ${{ env.RESOURCE_PATH }}
         env:
           override.value: 'from deploy.yaml'
-          
-          spring.datasource.url: ${{ secrets.AWS_URL}}       
           spring.datasource.username: ${{ secrets.AWS_RDS_USERNAME }} 
           spring.datasource.password: ${{ secrets.AWS_RDS_PASSWORD }} 
-          cloud.aws.credentials.access-key: ${{ secrets.AWS_ACCESS_KEY_ID_ENV }}
-          cloud.aws.credentials.secret-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_ENV }}
+          cloud.aws.credentials.access-key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          cloud.aws.credentials.secret-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           cloud.aws.region.static: ${{ secrets.AWS_REGION }}
-          cloud.aws.s3.bucket.url: ${{ secrets.S3_BUCKET_URL}}
-          cloud.aws.s3.bucket: springblog
-          spring.servlet.multipart.max-file-size: 20MB
-          spring.servlet.multipart.max-request-size: 20MB
-          spring.jpa.hibernate.ddl-auto: update
-          
-          server.servlet.encoding.charset: utf-8
-          server.servlet.encoding.enabled: true
-          server.servlet.encoding.force: true
-          spring.jackson.serialization.FAIL_ON_EMPTY_BEANS: false
-          logging.level.com.amazonaws.util.EC2MetadataUtils: error
-          spring.mvc.pathmatch.matching-strategy: ant_path_matcher
 
-          
-          
-          spring.security.oauth2.client.registration.kakao.client-id: ${{ secrets.KAKAO_CLIENT_ID}}
-          spring.security.oauth2.client.registration.kakao.client-secret : ${{ secrets.KAKAO_CLIENT_SCERET}}
-          spring.security.oauth2.client.registration.kakao.scope: profile_nickname, profile_image, account_email
-          spring.security.oauth2.client.registration.kakao.redirect-uri : ${{ secrets.KAKAO_REDIRECT}}
           
           
       - name: Grant execute permission for gradlew
