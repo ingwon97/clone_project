@@ -76,12 +76,5 @@ public class MemberController {
     return memberService.socialUserInfo(userDetails);
   }
 
-  //인가 테스트용 배포 전 삭제
-  @GetMapping("/test")
-  public String testAuth(HttpServletRequest request){
-    String token = request.getHeader("Authorization");
-    return "테스트  ########     "+token;
 
-
-  }
 }

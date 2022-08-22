@@ -61,3 +61,7 @@ tasks.named('test') {
 test {
     useJUnitPlatform()
 }
+// **-plain.jar not gonna be produced cuz of this command.
+jar {
+    enabled = false
+}
