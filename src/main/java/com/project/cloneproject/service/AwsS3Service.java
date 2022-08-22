@@ -52,7 +52,7 @@ public class AwsS3Service {
 
         if(postRequestDto.getImageUrl() == null){
 
-            return null;
+            return null; // 사진 미등록시 null 값으로 DB 저장 안되도록 분기 처리
         }
 
         String fileName = UUID.randomUUID().toString();
