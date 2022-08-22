@@ -9,4 +9,6 @@ import java.util.Optional;
 
 public interface PostRepository extends JpaRepository<Post, Long> {
     List<Post> findAllByMember(Member member);
+
+    List<Post> findAllByMemberOrderByCreatedAtDesc(Member member);
 }

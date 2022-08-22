@@ -94,11 +94,16 @@ public class PostService {
         // post들을 저장할 list배열선언
         List<Post> posts = new ArrayList<>();
 
+        List<Post> allByMember = postRepository.findAllByMemberOrderByCreatedAtDesc(member);
+        for (Post post : allByMember) {
+            posts.add(post);
+        }
+
         // friends들을 모두 돌려줄 예정정
         // 1. 친구로 등록된 멤버들의 게시글들을 List형태로 저장
         // 2. posts.add => 해당 게시글들을 List<Post> posts 데이터 안에 add
         for (Friend friend : friendsByMember) {
-            List<Post> postsByMember = postRepository.findAllByMember(friend.getFromMember());
+            List<Post> postsByMember = postRepository.findAllByMemberOrderByCreatedAtDesc(friend.getFromMember());
             for (Post post : postsByMember) {
                 posts.add(post);
             }
