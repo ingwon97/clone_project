@@ -49,6 +49,12 @@ public class AwsS3Service {
 
     @Transactional
     public String getSavedS3ImageUrl(PostRequestDto postRequestDto) throws IOException {
+
+        if(postRequestDto.getImageUrl() == null){
+
+            return null;
+        }
+
         String fileName = UUID.randomUUID().toString();
         String fileUrl;
 

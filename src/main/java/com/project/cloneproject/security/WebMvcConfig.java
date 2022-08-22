@@ -12,8 +12,9 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("*")  //클라이언트에서 허용
+                .allowedOrigins("http://localhost:3000")  //클라이언트에서 허용
                 .allowedHeaders("*")
+                .allowCredentials(true)
                 .exposedHeaders(HttpHeaders.AUTHORIZATION)
                 .allowedMethods(
                         HttpMethod.GET.name(),
@@ -21,5 +22,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
                         HttpMethod.POST.name(),
                         HttpMethod.PUT.name(),
                         HttpMethod.DELETE.name());
+
     }
 }
