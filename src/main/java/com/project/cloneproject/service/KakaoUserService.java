@@ -47,7 +47,7 @@ public class KakaoUserService {
 
     // 카카오 로그인
     @Transactional
-    public void kakaoLogin(String code,HttpServletResponse response) throws JsonProcessingException {
+    public void kakaoLogin(String code, HttpServletResponse response) throws JsonProcessingException {
         // 1. "인가 코드"로 "액세스 토큰" 요청
         System.out.println("카카오 로그인 1번 접근");
         String accessToken = getAccessToken(code);
@@ -62,7 +62,7 @@ public class KakaoUserService {
 
         // 4. 강제 로그인 처리 & jwt 토큰 발급
         System.out.println("카카오 로그인 4번 접근");
-        jwtTokenCreate(kakaoUser,response);
+        jwtTokenCreate(kakaoUser, response);
     }
 
     // 1. "인가 코드"로 "액세스 토큰" 요청
@@ -129,7 +129,7 @@ public class KakaoUserService {
 
         // nickname 가져오기
 
-        String nickname =  jsonNode.get("kakao_account").get("profile").get("nickname").asText();
+        String nickname = jsonNode.get("kakao_account").get("profile").get("nickname").asText();
 
         // 이메일 값 필수
         String email = jsonNode.get("kakao_account").get("email").asText();
@@ -138,7 +138,7 @@ public class KakaoUserService {
         String profileImage = jsonNode.get("kakao_account").get("profile").get("profile_image_url").asText();
         String kakaoDefaultImg = "http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_640x640.jpg"; //카카오 기본 이미지
         String defaultImage = "https://buckitforimg.s3.ap-northeast-2.amazonaws.com/default_profile.png"; // 기본 프사
-        if (profileImage==null || profileImage.equals(kakaoDefaultImg))
+        if (profileImage == null || profileImage.equals(kakaoDefaultImg))
             profileImage = defaultImage; // 우리 사이트 기본 이미지
 
         return new SocialUserInfoDto(socialId, nickname, email, profileImage);
@@ -150,7 +150,7 @@ public class KakaoUserService {
         // 다른 사용자인줄 알고 로그인이 된다. 그래서 소셜아이디로 구분해보자
         String kakaoSocialID = kakaoUserInfo.getSocialId();
         Member kakaoUser = memberRepository.findBySocialId(kakaoSocialID)
-                        .orElse(null);
+                .orElse(null);
 
         // null값 오면 회원가입 가능 기존 사용자가 없다는 뜻
         if (kakaoUser == null) {  // 회원가입
@@ -163,11 +163,12 @@ public class KakaoUserService {
             RoleEnum role = RoleEnum.USER; // 가입할 때 일반사용자로 로그인
 
             kakaoUser = Member.builder().
-                         username(email)
-                        .nickname(nickname)
-                        .password(encodedPassword)
-                        .profileImg(profileImage)
-                        .socialId(socialId).build();
+                    username(email)
+                    .nickname(nickname)
+                    .password(encodedPassword)
+                    .profileImg(profileImage)
+                    .role(role)
+                    .socialId(socialId).build();
 
             memberRepository.save(kakaoUser);
         }

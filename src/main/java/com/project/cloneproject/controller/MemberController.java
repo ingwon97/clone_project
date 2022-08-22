@@ -10,11 +10,12 @@ import com.project.cloneproject.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 
 
 @RestController
@@ -75,4 +76,12 @@ public class MemberController {
     return memberService.socialUserInfo(userDetails);
   }
 
+  //인가 테스트용 배포 전 삭제
+  @GetMapping("/test")
+  public String testAuth(HttpServletRequest request){
+    String token = request.getHeader("Authorization");
+    return "테스트  ########     "+token;
+
+
+  }
 }
