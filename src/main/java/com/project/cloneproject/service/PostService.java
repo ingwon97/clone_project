@@ -7,6 +7,7 @@ import com.project.cloneproject.controller.response.ResponseDto;
 import com.project.cloneproject.domain.Friend;
 import com.project.cloneproject.domain.Member;
 import com.project.cloneproject.domain.Post;
+import com.project.cloneproject.domain.Timestamped;
 import com.project.cloneproject.security.UserDetailsImpl;
 import com.project.cloneproject.repository.FriendRepository;
 import com.project.cloneproject.repository.PostRepository;
@@ -19,6 +20,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Slf4j
@@ -109,6 +112,17 @@ public class PostService {
             }
             // 친구의 post데이터가 list형태로 반환 -> list<Post> posts에 넣어주려고 함
         }
+
+        Collections.sort(posts, new Comparator<Post>() {
+            @Override
+            public int compare(Post o1, Post o2) {
+                return o2.getCreatedAt().compareTo(o1.getCreatedAt());
+            }
+        });
+
+        posts.forEach(post -> {
+            System.out.println(post.getCreatedAt());
+        });
 
         // 위에서 추가해준 데이터들을 return해준다
         return ResponseDto.success(posts);

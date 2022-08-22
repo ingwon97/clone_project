@@ -1,5 +1,6 @@
 package com.project.cloneproject.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.project.cloneproject.controller.request.PostRequestDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,6 +32,7 @@ public class Post extends Timestamped{
     @Lob
     private String content;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "post")
     private final List<Comment> commentList = new ArrayList<>();
 
