@@ -1,5 +1,6 @@
 package com.project.cloneproject.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.project.cloneproject.controller.request.PostRequestDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,8 +32,17 @@ public class Post extends Timestamped{
     @Lob
     private String content;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "post")
     private final List<Comment> commentList = new ArrayList<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "post", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private final List<Likes> likes = new ArrayList<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "comment", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private final List<Comment> comments = new ArrayList<>();
 
     public Post(PostRequestDto postRequestDto, Member member) {
         this.imageUrl = postRequestDto.getImageUrl();

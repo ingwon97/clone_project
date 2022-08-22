@@ -37,13 +37,18 @@ public class LikeService {
 
         Post post = isPresentPost(postId);
 
-        Likes likes = likeRepository.findByMemberAndPost(member, post).orElse(null);
-        if (null != likes) {
-            likeRepository.delete(likes);
+        Likes like = likeRepository.findByMemberAndPost(member, post).orElse(null);
+        if (null != like) {
+            likeRepository.delete(like);
             return ResponseDto.success(false);
         }
 
-        likeRepository.save(likes);
+        like = Likes.builder()
+                .member(member)
+                .post(post)
+                .build();
+
+        likeRepository.save(like);
         return ResponseDto.success(true);
     }
 

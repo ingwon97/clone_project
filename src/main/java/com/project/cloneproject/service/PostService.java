@@ -3,10 +3,14 @@ package com.project.cloneproject.service;
 
 import com.project.cloneproject.controller.request.PostRequestDto;
 import com.project.cloneproject.controller.response.PostResponseDto;
+import com.project.cloneproject.controller.response.PostResponseTempDto;
 import com.project.cloneproject.controller.response.ResponseDto;
 import com.project.cloneproject.domain.Friend;
 import com.project.cloneproject.domain.Member;
 import com.project.cloneproject.domain.Post;
+import com.project.cloneproject.domain.Timestamped;
+import com.project.cloneproject.repository.CommentRepository;
+import com.project.cloneproject.repository.LikeRepository;
 import com.project.cloneproject.security.UserDetailsImpl;
 import com.project.cloneproject.repository.FriendRepository;
 import com.project.cloneproject.repository.PostRepository;
@@ -19,6 +23,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Slf4j
@@ -29,6 +35,8 @@ public class PostService {
     private final PostRepository postRepository;
     private final AwsS3Service awsS3Service;
     private final FriendRepository friendRepository;
+    private final LikeRepository likeRepository;
+    private final CommentRepository commentRepository;
 
 
     public ResponseDto<PostResponseDto> createPost(PostRequestDto postRequestDto, UserDetailsImpl userDetails) throws IOException {
@@ -94,18 +102,42 @@ public class PostService {
         // post들을 저장할 list배열선언
         List<Post> posts = new ArrayList<>();
 
+        List<Post> allByMember = postRepository.findAllByMemberOrderByCreatedAtDesc(member);
+        for (Post post : allByMember) {
+            posts.add(post);
+
+        }
+
         // friends들을 모두 돌려줄 예정정
         // 1. 친구로 등록된 멤버들의 게시글들을 List형태로 저장
         // 2. posts.add => 해당 게시글들을 List<Post> posts 데이터 안에 add
         for (Friend friend : friendsByMember) {
-            List<Post> postsByMember = postRepository.findAllByMember(friend.getFromMember());
+            List<Post> postsByMember = postRepository.findAllByMemberOrderByCreatedAtDesc(friend.getFromMember());
             for (Post post : postsByMember) {
                 posts.add(post);
             }
             // 친구의 post데이터가 list형태로 반환 -> list<Post> posts에 넣어주려고 함
         }
 
+        Collections.sort(posts, new Comparator<Post>() {
+            @Override
+            public int compare(Post o1, Post o2) {
+                return o2.getCreatedAt().compareTo(o1.getCreatedAt());
+            }
+        });
+
+        // 안에다가 commentList랑, like의 개수를 반환해줘야디는데
+        List<PostResponseTempDto> postResponseTempDtos = new ArrayList<>();
+
+        for (Post post : posts) {
+            postResponseTempDtos.add(PostResponseTempDto.builder()
+                    .posts(post)
+                    .LikeNum(post.getLikes().size())
+                    .commentNum(post.getComments().size())
+                    .build());
+        }
+
         // 위에서 추가해준 데이터들을 return해준다
-        return ResponseDto.success(posts);
+        return ResponseDto.success(postResponseTempDtos);
     }
 }

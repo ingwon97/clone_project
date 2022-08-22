@@ -12,14 +12,12 @@ public class CommentController {
 
     private final CommentService commentService;
 
-
     // 댓글 작성
     @PostMapping("/api/comments/{postId}")
     public ResponseEntity<?> createComment(@PathVariable Long postId, @RequestBody CommentRequestDto commentRequestDto) {
         return commentService.createComment(postId, commentRequestDto);
 
     }
-
 
     // 댓글 수정
     @PutMapping("/api/comments/{postId}/{commentId}")
@@ -28,7 +26,6 @@ public class CommentController {
 
     }
 
-
     // 댓글 삭제
     @DeleteMapping("/api/comments/{postId}/{commentId}")
     public ResponseEntity<?> deleteComment(@PathVariable Long postId, @PathVariable Long commentId) {
@@ -36,14 +33,10 @@ public class CommentController {
 
     }
 
-
     // 선택 게시글 댓글 조회
     @GetMapping("/api/comments/{postId}")
     public ResponseEntity<?> readComment(@PathVariable Long postId) {
         return commentService.readComment(postId);
 
     }
-
-
-
 }
