@@ -27,6 +27,7 @@ fi
 
 
 echo "> DEPLOY_JAR 배포" >> $DEPLOY_LOG_PATH
+cd /home/ubuntu/app/foocebak/build/libs/
 nohup java -jar clone-project-0.0.1-SNAPSHOT.jar --spring.config.location=./application.properties --server.port=8080 >> $APPLICATION_LOG_PATH 2> $DEPLOY_ERR_LOG_PATH &
 
 sleep 3
