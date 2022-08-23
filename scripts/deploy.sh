@@ -1,12 +1,5 @@
 
 
-PROJECT_NAME="foocebak"
-JAR_PATH="/home/ubuntu/app/$PROJECT_NAME/build/libs/*.jar"
-DEPLOY_LOG_PATH="/home/ubuntu/app/$PROJECT_NAME/deploy.log"
-DEPLOY_ERR_LOG_PATH="/home/app/$PROJECT_NAME/deploy_err.log"
-APPLICATION_LOG_PATH="/home/app/$PROJECT_NAME/application.log"
-BUILD_JAR=$(ls $JAR_PATH)
-
 echo "===== 배포 시작 : $(date +%c) =====" >> $DEPLOY_LOG_PATH
 
 
@@ -27,8 +20,7 @@ fi
 
 
 echo "> DEPLOY_JAR 배포" >> $DEPLOY_LOG_PATH
-cd app/foocebak/build/libs/
-nohup java -jar clone-project-0.0.1-SNAPSHOT.jar --spring.config.location=./application.properties --server.port=8080 >> $APPLICATION_LOG_PATH 2> $DEPLOY_ERR_LOG_PATH &
+nohup java -jar /home/ubuntu/app/foocebak/build/libs/clone-project-0.0.1-SNAPSHOT.jar --spring.config.location=./application.properties --server.port=8080 >> $APPLICATION_LOG_PATH 2> $DEPLOY_ERR_LOG_PATH &
 
 sleep 3
 
