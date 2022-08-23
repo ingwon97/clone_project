@@ -27,7 +27,7 @@ fi
 
 
 echo "> DEPLOY_JAR 배포" >> $DEPLOY_LOG_PATH
-nohup java -jar /home/ubuntu/foocebak/deploy/clone-project-0.0.1-SNAPSHOT.jar --spring.config.location=./application.properties --server.port=8000 -Duser.timezone="Asia/Seoul"&
+nohup java -jar /home/ubuntu/foocebak/deploy/clone-project-0.0.1-SNAPSHOT.jar --spring.config.location=/home/ubuntu/foocebak/deploy/application.properties --server.port=8000 -Duser.timezone="Asia/Seoul"&
 
 sleep 3
 
