@@ -60,6 +60,15 @@ public class PostService {
         Post findPost = postRepository.findById(postId).get();
 
         if(findPost.getMember().getUsername().equals(userDetails.getUsername())) {
+
+            if(findPost.getImageUrl() == null){ // 사진이 등록되지않은 게시글 이미지 수정 코드추가
+
+                String updateImageUrl = awsS3Service.getSavedS3ImageUrl(postRequestDto);
+                postRequestDto.setImageUrl(updateImageUrl);
+                findPost.update(postRequestDto);
+                return new ResponseEntity<>(ResponseDto.success(new PostResponseDto(findPost)),HttpStatus.OK);
+            }
+
             String deleteUrl = findPost.getImageUrl();
             awsS3Service.deleteImage(deleteUrl);
             String updateImageUrl = awsS3Service.getSavedS3ImageUrl(postRequestDto);
