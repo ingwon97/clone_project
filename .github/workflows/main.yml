@@ -33,6 +33,21 @@ jobs:
         run: ./gradlew build -x test
         shell: bash
 
+
+      - name: Make Directiory for deliver
+        run: mkdir deploy
+
+
+      # Jar 파일 복사
+      - name: Copy Jar
+        run: cp ./build/libs/*.jar ./deploy
+
+
+
+      - name: Copy shell
+        run: cp ./scripts/* ./deploy
+
+
         # [3]
       - name: Make zip file
         run: zip -r ./$GITHUB_SHA.zip .
