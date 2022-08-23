@@ -2,9 +2,9 @@
 # shellcheck disable=SC1128
 
 PROJECT_NAME="github_action"
-JAR_PATH="/home/app/foocebak/build/libs/*.jar"
+JAR_PATH="/home/ubuntu/app/foocebak/build/libs/*.jar"
 DEPLOY_PATH=/home/app/foocebak/
-DEPLOY_LOG_PATH="/home/app/foocebak/deploy.log"
+DEPLOY_LOG_PATH="/home/ubuntu/app/foocebak/deploy.log"
 DEPLOY_ERR_LOG_PATH="/home/app/foocebak/deploy_err.log"
 APPLICATION_LOG_PATH="/home/app/foocebak/application.log"
 BUILD_JAR=$(ls $JAR_PATH)
