@@ -2,7 +2,7 @@ version: 0.0
 os: linux
 files:
   - source:  /
-    destination: /home/ubuntu/foocebak
+    destination: /home/ubuntu/foocebak/deploy
     overwrite: yes
 
 permissions:
@@ -14,5 +14,5 @@ permissions:
 
 hooks:
   AfterInstall:
-    - location: deploy/deploy.sh
+    - location: deploy.sh
       runas: ubuntu
