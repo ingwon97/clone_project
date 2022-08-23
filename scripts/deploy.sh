@@ -1,11 +1,11 @@
 
 #!/bin/bash
 PROJECT_NAME="github_action"
-JAR_PATH="/home/ec2-user/github_action/build/libs/*.jar"
-DEPLOY_PATH=/home/ec2-user/$PROJECT_NAME/
-DEPLOY_LOG_PATH="/home/ec2-user/$PROJECT_NAME/deploy.log"
-DEPLOY_ERR_LOG_PATH="/home/ec2-user/$PROJECT_NAME/deploy_err.log"
-APPLICATION_LOG_PATH="/home/ec2-user/$PROJECT_NAME/application.log"
+JAR_PATH="/home/app/foocebak/build/libs/*.jar"
+DEPLOY_PATH=/home/app/foocebak/
+DEPLOY_LOG_PATH="/home/app/foocebak/deploy.log"
+DEPLOY_ERR_LOG_PATH="/home/app/foocebak/eploy_err.log"
+APPLICATION_LOG_PATH="/home/app/foocebak/application.log"
 BUILD_JAR=$(ls $JAR_PATH)
 JAR_NAME=$(basename $BUILD_JAR)
 

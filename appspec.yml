@@ -2,17 +2,15 @@ version: 0.0
 os: linux
 files:
   - source:  /
-    destination: /home/ec2-user/github_action
+    destination: /home/app/foocebak
     overwrite: yes
 
 permissions:
-  - object: /
-    pattern: "**"
-    owner: ec2-user
-    group: ec2-user
+  - object: /home/ubuntu
+    owner: ubuntu
+    group: ubuntu
 
 hooks:
-  ApplicationStart:
+  AfterInstall:
     - location: scripts/deploy.sh
-      timeout: 60
-      runas: root
+      runas: ubuntu
