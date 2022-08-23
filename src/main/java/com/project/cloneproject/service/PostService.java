@@ -81,6 +81,10 @@ public class PostService {
         Post findPost = postRepository.findById(postId).get();
 
         if(findPost.getMember().getUsername().equals(userDetails.getUsername())) {
+            if(findPost.getImageUrl() == null) {
+                postRepository.delete(findPost);
+                return new ResponseEntity<>(ResponseDto.success("게시글 삭제가 완료되었습니다."), HttpStatus.OK); // 이미지 없는 게시글 삭제
+            }
             awsS3Service.deleteImage(findPost.getImageUrl());
             postRepository.delete(findPost);
 

@@ -125,17 +125,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         skipPathList.add("GET,/images/**");
         skipPathList.add("GET,/css/**");
 
-//        // 회원 관리 API 허용
-//        skipPathList.add("GET,/api/member/**");
 
         //카카오톡 skipPathList
         skipPathList.add("GET,/oauth/**");
         skipPathList.add("GET,/oauth/kakao/callback");
         skipPathList.add("GET,/oauth/kakao/callback/**");
 
-//        //네이버, 구글 skipPathList
-//        skipPathList.add("GET,/oauth/naver/callback");
-//        skipPathList.add("GET,/oauth/google/callback");
 
         //회원가입하기, 로그인 관련 skipPathList
 //        skipPathList.add("POST,/member/signup");  //본래 프사 유무로 api 두개 만들려했던 흔적임
@@ -144,11 +139,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         skipPathList.add("POST,/api/member/signup/checkID");  //username 중복 체크
         skipPathList.add("POST,/api/member/signup/nickID");  //nickname 중복 체크
-        skipPathList.add("POST,/api/member/login");
 
-//        //로그인 없이도 접근 가능한 skipPathList
-//        skipPathList.add("GET,/api/**"); //GET메서드에 /api 다음 주소는 모두 로그인없이 접근 가능
 
+        //무중단 배포 확인용
+        skipPathList.add("GET,/");
+        skipPathList.add("GET,/health");
 
 //----------아래는 그대로----------
         skipPathList.add("GET,/basic.js");

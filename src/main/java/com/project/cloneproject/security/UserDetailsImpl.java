@@ -51,19 +51,19 @@ public class UserDetailsImpl implements UserDetails {
         return true;
     }
 
-    @Override //인가를 해주는 부분
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-//        UserRoleEnum role = user.getRole();
-        String authority = "ROLE_USER";
-
-        SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(authority);
-        Collection<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(simpleGrantedAuthority);
-
-        return authorities;
-    }
-//@Override // 인가를 해주는 부분
-//public Collection<? extends GrantedAuthority> getAuthorities() {
-//    return Collections.emptyList();
-//}
+//    @Override //인가를 해주는 부분
+//    public Collection<? extends GrantedAuthority> getAuthorities() {
+////        UserRoleEnum role = user.getRole();
+//        String authority = "ROLE_USER";
+//
+//        SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(authority);
+//        Collection<GrantedAuthority> authorities = new ArrayList<>();
+//        authorities.add(simpleGrantedAuthority);
+//
+//        return authorities;
+//    }
+@Override // 인가를 해주는 부분
+public Collection<? extends GrantedAuthority> getAuthorities() {
+    return Collections.emptyList();
+}
 }

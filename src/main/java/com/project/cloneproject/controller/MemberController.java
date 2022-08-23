@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-
 
 @RestController
 @RequiredArgsConstructor
@@ -74,6 +72,12 @@ public class MemberController {
   @GetMapping("/social/member/islogin")
   public ResponseEntity socialUserInfo(@AuthenticationPrincipal UserDetailsImpl userDetails) {
     return memberService.socialUserInfo(userDetails);
+  }
+
+  @GetMapping("/health")
+  public String healthy(){
+
+    return "healthy";
   }
 
 
