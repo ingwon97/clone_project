@@ -6,7 +6,7 @@ files:
     overwrite: yes
 
 permissions:
-  - object: /home/ubuntu
+  - object: /
     pattern: "**"
     owner: ubuntu
     group: ubuntu
@@ -14,5 +14,5 @@ permissions:
 
 hooks:
   AfterInstall:
-    - location: /home/ubuntu/foocebak/deploy/deploy.sh
+    - location: deploy/deploy.sh
       runas: ubuntu
