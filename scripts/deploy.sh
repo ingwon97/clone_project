@@ -2,9 +2,9 @@
 
 #!/bin/bash
 
-DEPLOY_LOG_PATH="/home/ubuntu/app/foocebak/deploy.log"
-DEPLOY_ERR_LOG_PATH="/home/app/foocebak/deploy_err.log"
-APPLICATION_LOG_PATH="/home/app/foocebak/application.log"
+DEPLOY_LOG_PATH="/home/ubuntu/foocebak/deploy.log"
+DEPLOY_ERR_LOG_PATH="/home/ubuntu/foocebak/deploy_err.log"
+APPLICATION_LOG_PATH="/home/ubuntu/foocebak/application.log"
 
 
 echo "===== 배포 시작 : $(date +%c) =====" >> $DEPLOY_LOG_PATH
@@ -27,7 +27,7 @@ fi
 
 
 echo "> DEPLOY_JAR 배포" >> $DEPLOY_LOG_PATH
-nohup java -jar /home/ubuntu/app/foocebak/deploy/clone-project-0.0.1-SNAPSHOT.jar --spring.config.location=./application.properties --server.port=8000 -Duser.timezone="Asia/Seoul"&
+nohup java -jar /home/ubuntu/foocebak/deploy/clone-project-0.0.1-SNAPSHOT.jar --spring.config.location=./application.properties --server.port=8000 -Duser.timezone="Asia/Seoul"&
 
 sleep 3
 
