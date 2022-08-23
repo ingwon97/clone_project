@@ -1,6 +1,7 @@
 package com.project.cloneproject.service;
 
 import com.project.cloneproject.controller.request.AddFriendRequestDto;
+import com.project.cloneproject.controller.response.FriendResponseDto;
 import com.project.cloneproject.controller.response.ResponseDto;
 import com.project.cloneproject.domain.Friend;
 import com.project.cloneproject.domain.Member;
@@ -9,7 +10,9 @@ import com.project.cloneproject.repository.MemberRepository;
 import com.project.cloneproject.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -78,18 +81,21 @@ public class FriendService {
         }
     }*/
 
-
-
-
-    public ResponseDto<?> getFriends(UserDetailsImpl userDetails) {
+    public FriendResponseDto getFriends(UserDetailsImpl userDetails) {
 
         Member member = userDetails.getMember();
-        if (null == member) {
-            return ResponseDto.fail("INVALID_TOKEN", "Token이 유효하지 않습니다.");
-        }
 
         List<Friend> allByMember = friendRepository.findAllByMember(member);
-        return ResponseDto.success(allByMember);
+        List<Member> friends = new ArrayList<>();
+        for (Friend friend : allByMember) {
+            friends.add(friend.getFromMember());
+        }
+
+        FriendResponseDto friendResponseDto = FriendResponseDto.builder()
+                .friends(friends)
+                .build();
+
+        return friendResponseDto;
     }
 
     public ResponseDto<?> searchFriend(String nickname) {
