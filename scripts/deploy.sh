@@ -1,3 +1,6 @@
+DEPLOY_LOG_PATH="/home/ubuntu/app/$PROJECT_NAME/deploy.log"
+DEPLOY_ERR_LOG_PATH="/home/app/$PROJECT_NAME/deploy_err.log"
+APPLICATION_LOG_PATH="/home/app/$PROJECT_NAME/application.log"
 
 
 echo "===== 배포 시작 : $(date +%c) =====" >> $DEPLOY_LOG_PATH
