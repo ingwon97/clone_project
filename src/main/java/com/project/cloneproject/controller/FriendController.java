@@ -1,6 +1,7 @@
 package com.project.cloneproject.controller;
 
 import com.project.cloneproject.controller.request.AddFriendRequestDto;
+import com.project.cloneproject.controller.response.FriendResponseDto;
 import com.project.cloneproject.controller.response.ResponseDto;
 import com.project.cloneproject.security.UserDetailsImpl;
 import com.project.cloneproject.service.FriendService;
@@ -28,7 +29,7 @@ public class FriendController {
     }
 
     @GetMapping("/api/friends")
-    public ResponseDto<?> getFriends(@AuthenticationPrincipal UserDetailsImpl userDetails) {
+    public FriendResponseDto getFriends(@AuthenticationPrincipal UserDetailsImpl userDetails) {
         return friendService.getFriends(userDetails);
     }
 
