@@ -76,8 +76,8 @@ public class KakaoUserService {
         body.add("grant_type", "authorization_code");
         body.add("client_id", kakaoClientId); //본인의 REST API키
         body.add("client_secret", kakaoClientSecret);
-//        body.add("redirect_uri", kakaoRedirect); //성공 후 리다이렉트 되는 곳
-        body.add("redirect_uri", kakaoRedirect);
+        body.add("redirect_uri", kakaoRedirect); //성공 후 리다이렉트 되는 곳 프론트 배포서버
+        body.add("redirect_uri", "http://localhost:3000/oauth/kakao/callback");
         body.add("code", code);
 
         /**
@@ -187,7 +187,6 @@ public class KakaoUserService {
         UserDetailsImpl userDetails1 = ((UserDetailsImpl) authentication.getPrincipal());
         String token = JwtTokenUtils.generateJwtToken(userDetails1);
         response.addHeader("Authorization", "BEARER" + " " + token);
-        response.setContentType("application/json; charset=utf-8");
 
     }
 }
