@@ -146,7 +146,7 @@ public class PostService {
             postResponseTempDtos.add(PostResponseTempDto.builder()
                     .posts(post)
                     .LikeNum(post.getLikes().size())
-                    .commentNum(post.getComments().size())
+                    .commentNum(post.getCommentList().size())
                     .build());
         }
 

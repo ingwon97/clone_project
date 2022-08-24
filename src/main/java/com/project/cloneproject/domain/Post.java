@@ -33,16 +33,16 @@ public class Post extends Timestamped{
     private String content;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "post")
+    @OneToMany(mappedBy = "post",cascade = CascadeType.REMOVE, orphanRemoval = true)
     private final List<Comment> commentList = new ArrayList<>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "post", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, orphanRemoval = true)
     private final List<Likes> likes = new ArrayList<>();
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "comment",cascade = CascadeType.REMOVE, orphanRemoval = true)
-    private final List<Comment> comments = new ArrayList<>();
+//    @JsonIgnore
+//    @OneToMany(mappedBy = "comment",cascade = CascadeType.REMOVE, orphanRemoval = true)
+//    private final List<Comment> comments = new ArrayList<>();
 
     public Post(PostRequestDto postRequestDto, Member member) {
         this.imageUrl = postRequestDto.getImageUrl();
