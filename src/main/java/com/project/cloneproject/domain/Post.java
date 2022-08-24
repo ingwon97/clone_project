@@ -33,7 +33,7 @@ public class Post extends Timestamped{
     private String content;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "post")
+    @OneToMany(mappedBy = "post", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, orphanRemoval = true)
     private final List<Comment> commentList = new ArrayList<>();
 
     @JsonIgnore
