@@ -10,6 +10,8 @@ import com.project.cloneproject.repository.FriendRepository;
 import com.project.cloneproject.repository.MemberRepository;
 import com.project.cloneproject.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,7 +25,7 @@ public class FriendService {
     private final MemberRepository memberRepository;
     private final FriendRepository friendRepository;
 
-    public ResponseDto<?> addFriend(AddFriendRequestDto requestDto, UserDetailsImpl userDetails) {
+    public ResponseEntity<?> addFriend(AddFriendRequestDto requestDto, UserDetailsImpl userDetails) {
         Member member = userDetails.getMember();
 
 
@@ -35,12 +37,12 @@ public class FriendService {
         List<Friend> friends = friendRepository.findAllByMember(member);
         for (Friend friend : friends) {
             if (friend.getFromMember().equals(fromMember)) {
-                return ResponseDto.fail("FRIEND_IS_ALREADY_BE_REGISTED", "친구가 이미 등록되어 있습니다");
+                return new ResponseEntity<>(ResponseDto.fail("FRIEND_IS_ALREADY_BE_REGISTED", "친구가 이미 등록되어 있습니다"), HttpStatus.BAD_REQUEST);
             }
         }
 
         if (fromMember.equals(member)) {
-            return ResponseDto.fail("CAN_NOT_REGISTER", "자신은 등록할 수 없습니다");
+            return new ResponseEntity<>(ResponseDto.fail("CAN_NOT_REGISTER", "자신은 등록할 수 없습니다"), HttpStatus.BAD_REQUEST);
         }
 
         Friend savedFriend = Friend.builder()
@@ -50,7 +52,10 @@ public class FriendService {
 
         friendRepository.save(savedFriend);
 
-        return ResponseDto.success("친구추가가 완료되었습니다.");
+        List<Member> addFriend = new ArrayList<>();
+        addFriend.add(fromMember);
+
+        return new ResponseEntity<>(ResponseDto.success(addFriend), HttpStatus.OK);
 
     }
 

@@ -8,6 +8,7 @@ import com.project.cloneproject.security.UserDetailsImpl;
 import com.project.cloneproject.service.FriendService;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +25,7 @@ public class FriendController {
     }
 
     @PostMapping("/api/friends/add")
-    public ResponseDto<?> addFriend(@RequestBody AddFriendRequestDto requestDto,
+    public ResponseEntity<?> addFriend(@RequestBody AddFriendRequestDto requestDto,
                                     @AuthenticationPrincipal UserDetailsImpl userDetails) {
         return friendService.addFriend(requestDto, userDetails);
     }
