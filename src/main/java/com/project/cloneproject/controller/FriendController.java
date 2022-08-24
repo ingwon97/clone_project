@@ -1,6 +1,7 @@
 package com.project.cloneproject.controller;
 
 import com.project.cloneproject.controller.request.AddFriendRequestDto;
+import com.project.cloneproject.controller.request.FriendSearchRequestDto;
 import com.project.cloneproject.controller.response.FriendResponseDto;
 import com.project.cloneproject.controller.response.ResponseDto;
 import com.project.cloneproject.security.UserDetailsImpl;
@@ -35,8 +36,7 @@ public class FriendController {
 
     // member데이터지만, 임시로 friend에 넣었음
     @PostMapping("/api/search/members")
-    public ResponseDto<?> searchFriend(@ModelAttribute String nickname) {
-        return friendService.searchFriend(nickname);
+    public ResponseDto<?> searchFriend(@RequestBody FriendSearchRequestDto requestDto) {
+        return friendService.searchFriend(requestDto);
     }
-
 }

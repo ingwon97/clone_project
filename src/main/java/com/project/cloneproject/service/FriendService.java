@@ -1,6 +1,7 @@
 package com.project.cloneproject.service;
 
 import com.project.cloneproject.controller.request.AddFriendRequestDto;
+import com.project.cloneproject.controller.request.FriendSearchRequestDto;
 import com.project.cloneproject.controller.response.FriendResponseDto;
 import com.project.cloneproject.controller.response.ResponseDto;
 import com.project.cloneproject.domain.Friend;
@@ -98,7 +99,7 @@ public class FriendService {
         return friendResponseDto;
     }
 
-    public ResponseDto<?> searchFriend(String nickname) {
-        return ResponseDto.success(memberRepository.findAllByNicknameContaining(nickname));
+    public ResponseDto<?> searchFriend(FriendSearchRequestDto requestDto) {
+        return ResponseDto.success(memberRepository.findAllByNicknameContaining(requestDto.getNickname()));
     }
 }
