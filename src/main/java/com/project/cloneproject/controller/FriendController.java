@@ -35,7 +35,7 @@ public class FriendController {
 
     // member데이터지만, 임시로 friend에 넣었음
     @PostMapping("/api/search/members")
-    public ResponseDto<?> searchFriend(@RequestBody String nickname) {
+    public ResponseDto<?> searchFriend(@ModelAttribute String nickname) {
         return friendService.searchFriend(nickname);
     }
 
