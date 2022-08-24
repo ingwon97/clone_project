@@ -187,6 +187,8 @@ public class KakaoUserService {
         UserDetailsImpl userDetails1 = ((UserDetailsImpl) authentication.getPrincipal());
         String token = JwtTokenUtils.generateJwtToken(userDetails1);
         response.addHeader("Authorization", "BEARER" + " " + token);
+        response.setContentType("application/json; charset=utf-8");
+
     }
 }
 
