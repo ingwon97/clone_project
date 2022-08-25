@@ -130,6 +130,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         skipPathList.add("GET,/oauth/**");
         skipPathList.add("GET,/oauth/kakao/**");
 
+        //카카오톡 skipPathList
+        skipPathList.add("GET,/oauth/kakao/callback*");
+        skipPathList.add("GET,/oauth/authorize*");
+        skipPathList.add("GET,/oauth/kakao/callback/**");
+
 
 
         //회원가입하기, 로그인 관련 skipPathList
