@@ -186,7 +186,9 @@ public class KakaoUserService {
         // 여기부터 토큰 프론트에 넘기는것
         UserDetailsImpl userDetails1 = ((UserDetailsImpl) authentication.getPrincipal());
         String token = JwtTokenUtils.generateJwtToken(userDetails1);
+        response.setContentType("application/json; charset=utf-8");
         response.addHeader("Authorization", "BEARER" + " " + token);
+
 
     }
 }
