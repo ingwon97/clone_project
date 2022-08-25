@@ -133,8 +133,8 @@ facebook 클론 프로젝트 입니다.
 ## REPOSITORIES
 - BACK-END
 
-[GitHub - Camof1ow/clone_project: 항해99 7주차 팀과제](https://github.com/Camof1ow/clone_project)
+[GitHub - BackEnd/clone_project](https://github.com/ingwon97/clone_project)
 
 - FRONT-END
 
-[GitHub - bennoholik/facebook-clone: 항해99 7주차 팀과제](https://github.com/bennoholik/facebook-clone)<br><br>
+[GitHub - FrontEnd/facebook-clone](https://github.com/ingwon97/facebook-clone)<br><br>
