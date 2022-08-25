@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,7 +23,7 @@ public class SocialLoginController {
 
     //카카오 로그인
     @GetMapping("/oauth/kakao/callback")
-    public ResponseEntity kakaoLogin(@RequestParam String code, HttpServletResponse response) throws JsonProcessingException {
+    public ResponseEntity kakaoLogin(@PathVariable String code, HttpServletResponse response) throws JsonProcessingException {
 
         try { // 회원가입 진행 성공시
 

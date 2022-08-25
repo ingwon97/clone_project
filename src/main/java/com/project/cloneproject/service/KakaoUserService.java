@@ -77,7 +77,7 @@ public class KakaoUserService {
         body.add("client_id", kakaoClientId); //본인의 REST API키
         body.add("client_secret", kakaoClientSecret);
         body.add("redirect_uri", kakaoRedirect); //성공 후 리다이렉트 되는 곳 프론트 배포서버
-        body.add("redirect_uri", "http://localhost:3000/oauth/kakao/callback");
+//        body.add("redirect_uri", "http://localhost:3000/oauth/kakao/callback");
         body.add("code", code);
 
         /**
