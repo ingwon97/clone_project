@@ -27,7 +27,7 @@ facebook 클론 프로젝트 입니다.
 |김혜림|https://github.com/hlim9022|Back-end|
 |이동건|https://github.com/dongkeon-lee|Back-end|
 |황인권|https://github.com/ingwon97|Back-end|
-|이지혜|https://github.com/Jhoon2|Front-end|
+|이지혜|https://github.com/G-Hae|Front-end|
 |전지만|https://github.com/Camof1ow|Back-end|
 
 
