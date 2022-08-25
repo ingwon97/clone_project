@@ -19,8 +19,10 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TimeZone;
 
 @Configuration
 @EnableWebSecurity // 스프링 Security 지원을 가능하게 함
@@ -36,6 +38,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     ) {
         this.jwtAuthProvider = jwtAuthProvider;
         this.headerTokenExtractor = headerTokenExtractor;
+    }
+
+    @PostConstruct
+    public void start() {
+        TimeZone.setDefault(TimeZone.getTimeZone("Asia/Seoul"));
     }
 
     @Bean
