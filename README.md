@@ -3,7 +3,7 @@
 # focebak
 
 ![Title](./readme/foocebak.png)
-This is not for real commercial project, Its only for pratice.
+*not for commercial use
 
 
 ## ****🤷‍♂️ 프로젝트 목적****
