@@ -46,7 +46,7 @@ facebook 클론 프로젝트 입니다.
   <br>
    <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black">   
    <img src="https://img.shields.io/badge/redux-764ABC?style=for-the-badge&logo=redux&logoColor=purple"> 
- 
+
    <img src="https://img.shields.io/badge/styledcomponents-DB7093?style=for-the-badge&logo=styled-components&logoColor=pink">
   <br>
 
@@ -64,7 +64,7 @@ facebook 클론 프로젝트 입니다.
       <img src="https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=Java&logoColor=white">
       <img src="https://img.shields.io/badge/JSON Web Tokens-000000?style=for-the-badge&logo=JSON Web Tokens&logoColor=white">   
       <img src="https://img.shields.io/badge/Gradle-02303A?style=for-the-badge&logo=Gradle&logoColor=white"> 
- 
+
   <br>
    <img src="https://img.shields.io/badge/IntelliJ IDEA-000000?style=for-the-badge&logo=IntelliJ IDEA&logoColor=white">   
    <img src="https://img.shields.io/badge/Sourcetree-0052CC?style=for-the-badge&logo=Sourcetree&logoColor=white"> 
@@ -105,7 +105,7 @@ facebook 클론 프로젝트 입니다.
 #### 1-1. 회원가입 창
 ![LoginPage](./readme/pic1.png)
 - 가입시 프로필 사진을 업로드 할 수 있습니다.
-- 입력 값을 통해 유효성 검사를 실시간으로 보여줍니다. 
+- 입력 값을 통해 유효성 검사를 실시간으로 보여줍니다.
 
 
 #### 2.메인페이지
