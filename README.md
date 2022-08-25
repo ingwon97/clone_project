@@ -20,20 +20,67 @@ facebook 클론 프로젝트 입니다.
 
 ## ****⭐️ 팀 구성****
 
-4	노진서	김혜림	이동건	황인권	이지혜	전지만
+
 |이름|팀원 깃허브|포지션|
 |---|---|---|
-|노진서|https://github.com/oneqrhee|Back-end|
+|노진서|https://github.com/oneqrhee|Front-end|
 |김혜림|https://github.com/hlim9022|Back-end|
 |이동건|https://github.com/dongkeon-lee|Back-end|
 |황인권|https://github.com/ingwon97|Back-end|
 |이지혜|https://github.com/Jhoon2|Front-end|
-|전지만|https://github.com/Camof1ow|Front-end|
+|전지만|https://github.com/Camof1ow|Back-end|
 
 
 
 
 ## ****🛠주요기술****
+
+#### Front-end
+
+<div align=center> 
+      <img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"> 
+      <img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white"> 
+      <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
+     <img src="https://img.shields.io/badge/vercel-000000?style=for-the-badge&logo=vercel&logoColor=white"> 
+
+  <br>
+   <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black">   
+   <img src="https://img.shields.io/badge/redux-764ABC?style=for-the-badge&logo=redux&logoColor=purple"> 
+ 
+   <img src="https://img.shields.io/badge/styledcomponents-DB7093?style=for-the-badge&logo=styled-components&logoColor=pink">
+  <br>
+
+   <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
+
+</div>
+
+#### Back-end
+
+<div align=center> 
+      <img src="https://img.shields.io/badge/Spring Boot-6DB33F?style=for-the-badge&logo=Spring Boot&logoColor=white">
+      <img src="https://img.shields.io/badge/Spring Security-6DB33F?style=for-the-badge&logo=Spring Security&logoColor=white">
+      <img src="https://img.shields.io/badge/codedeploy-6DB33F?style=for-the-badge&logo=codedeploy&logoColor=white">
+  <br>
+      <img src="https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=Java&logoColor=white">
+      <img src="https://img.shields.io/badge/JSON Web Tokens-000000?style=for-the-badge&logo=JSON Web Tokens&logoColor=white">   
+      <img src="https://img.shields.io/badge/Gradle-02303A?style=for-the-badge&logo=Gradle&logoColor=white"> 
+ 
+  <br>
+   <img src="https://img.shields.io/badge/IntelliJ IDEA-000000?style=for-the-badge&logo=IntelliJ IDEA&logoColor=white">   
+   <img src="https://img.shields.io/badge/Sourcetree-0052CC?style=for-the-badge&logo=Sourcetree&logoColor=white"> 
+   <img src="https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=Postman&logoColor=white">
+
+   <br>
+   <img src="https://img.shields.io/badge/AmazonEC2-FF9900?style=for-the-badge&logo=AmazonEC2&logoColor=white">
+   <img src="https://img.shields.io/badge/Amazon S3-569A31?style=for-the-badge&logo=Amazon S3&logoColor=white"> 
+   <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=MySQL&logoColor=white">
+   <img src="https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=Ubuntu&logoColor=white">
+  <br>
+   <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
+   <img src="https://img.shields.io/badge/GitHub Actions-2088FF?style=for-the-badge&logo=GitHub Actions&logoColor=white">
+</div>
+  <br>  <br>
+
 
 
 
@@ -89,4 +136,4 @@ facebook 클론 프로젝트 입니다.
 
 - FRONT-END
 
-[GitHub - chipmunkcol/Hanghae99_MiniProject: 미니프로젝트!(6주차 팀과제)](https://github.com/chipmunkcol/Hanghae99_MiniProject)<br><br>
+[GitHub - bennoholik/facebook-clone: 항해99 7주차 팀과제](https://github.com/bennoholik/facebook-clone)<br><br>
